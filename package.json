@@ -1,0 +1,20 @@
+{
+  "name": "tech-news",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JJLindsey/tech-news.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JJLindsey/tech-news/issues"
+  },
+  "homepage": "https://github.com/JJLindsey/tech-news#readme"
+}
