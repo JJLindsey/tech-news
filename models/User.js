@@ -7,7 +7,42 @@ class User extends Model { }
 //define table columns & config
 User.init(
     {
-        //table column def here
+        //define id column
+        id:{
+            //use spec Sequelize DatatTypes object  what type of data it is
+            type: DataTypes.INTEGER,
+            //equiv of SQL's NOT NULL option
+            allowNull: false,
+            //instruct that is is primary key
+            primaryKey: true,
+            //turn on auto increment
+            autoIncrement: true
+        },
+        //define username col
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        //define email col
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            //cannot be any dup email vaules in table
+            unique: true,
+            //if allowNull is set to false, can run data thru validators
+            validate: {
+                isEmail: true
+            }
+        },
+        //define passwoed col
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                //this means password must be at least four CHAR long
+                len: [4]
+            }
+        }
     },
     {
         //table config options here
