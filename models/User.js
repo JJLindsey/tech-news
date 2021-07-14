@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const bcrypt = require('bcrypt');
 
 //create user model
 class User extends Model { }
@@ -8,7 +9,7 @@ class User extends Model { }
 User.init(
     {
         //define id column
-        id:{
+        id: {
             //use spec Sequelize DatatTypes object  what type of data it is
             type: DataTypes.INTEGER,
             //equiv of SQL's NOT NULL option
@@ -44,7 +45,20 @@ User.init(
             }
         }
     },
+
     {
+        hooks: {
+            // set up beforeCreate lifecycle "hook" functionality
+            async beforeCreate(newUserData) {
+                newUserData.password = await bcrypt.hash(newUserData.password, 10);
+                return newUserData;
+            },
+            // set up beforeUpdate lifecycle "hook" functionality
+            async beforeUpdate(updatedUserData) {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+                return updatedUserData;
+            }
+        },
         //table config options here
         // pass in our imported sequelize connection (the direct connection to our database)
         sequelize,
